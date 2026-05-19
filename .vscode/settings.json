@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Assignment2Start.sln"
+    "dotnet.defaultSolution": "FIT2098-A2.sln"
 }
