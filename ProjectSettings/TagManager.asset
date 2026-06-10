@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Chopping
   - Logs Remove
+  - Shoveling
   layers:
   - Default
   - TransparentFX
