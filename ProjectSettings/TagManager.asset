@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Chopping
+  - Logs Remove
   layers:
   - Default
   - TransparentFX

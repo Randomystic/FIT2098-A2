@@ -85,4 +85,15 @@ public class IntCounter : MonoBehaviour
         None, GreaterThan, LessThan, EqualTo
     }
 
+    public void PrintAllTrashCollected(int value)
+    {
+        Debug.Log($"All Trash Collected: {value}");
+    }
+
+    public void PrintAllFirewoodChopped(int value)
+    {
+        Debug.Log($"All Firewood Chopped: {value}");
+    }
+
+
 }
