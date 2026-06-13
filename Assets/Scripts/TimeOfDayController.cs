@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteAlways]
@@ -13,6 +12,7 @@ public class TimeOfDayController : MonoBehaviour
 	public Light directionalLight;
 
 	float lastTime = -1f;
+	float environmentUpdateTimer;
 	Coroutine timeRoutine;
 
 	struct SkyKey
@@ -22,7 +22,15 @@ public class TimeOfDayController : MonoBehaviour
 		public float lightIntensity, exp;
 		public Vector3 lightRotation;
 
-		public SkyKey(float t, string top, string middle, string bottom, string lightColor, float lightIntensity, Vector3 lightRotation, float exp)
+		public SkyKey(
+			float t,
+			string top,
+			string middle,
+			string bottom,
+			string lightColor,
+			float lightIntensity,
+			Vector3 lightRotation,
+			float exp)
 		{
 			this.t = t;
 			this.top = Hex(top);
@@ -56,18 +64,26 @@ public class TimeOfDayController : MonoBehaviour
 	void Start()
 	{
 		ApplyTimeOfDay();
+		DynamicGI.UpdateEnvironment();
 	}
 
 	void Update()
 	{
-		if (!Application.isPlaying && !Mathf.Approximately(timeOfDay, lastTime))
+		if (!Mathf.Approximately(timeOfDay, lastTime))
+		{
 			ApplyTimeOfDay();
+			DynamicGI.UpdateEnvironment();
+		}
 	}
-
 	void OnValidate()
 	{
+		if (Application.isPlaying)
+			return;
+
 		ApplyTimeOfDay();
+		DynamicGI.UpdateEnvironment();
 	}
+
 
 	public void AddTime(float amount)
 	{
@@ -82,6 +98,7 @@ public class TimeOfDayController : MonoBehaviour
 		{
 			timeOfDay = targetTime;
 			ApplyTimeOfDay();
+			DynamicGI.UpdateEnvironment();
 			return;
 		}
 
@@ -94,21 +111,29 @@ public class TimeOfDayController : MonoBehaviour
 	IEnumerator TransitionTime(float targetTime)
 	{
 		float startTime = timeOfDay;
+		float duration = Mathf.Max(transitionTime, 0.01f);
 		float timer = 0f;
 
-		while (timer < transitionTime)
+		environmentUpdateTimer = 0f;
+
+		while (timer < duration)
 		{
 			timer += Time.deltaTime;
-			float blend = timer / transitionTime;
+			float blend = Mathf.Clamp01(timer / duration);
 
 			timeOfDay = Mathf.Lerp(startTime, targetTime, blend);
+
 			ApplyTimeOfDay();
+			UpdateEnvironmentLighting();
 
 			yield return null;
 		}
 
 		timeOfDay = targetTime;
 		ApplyTimeOfDay();
+		DynamicGI.UpdateEnvironment();
+
+		timeRoutine = null;
 
 		Debug.Log("Time of day moved to: " + timeOfDay);
 	}
@@ -118,10 +143,11 @@ public class TimeOfDayController : MonoBehaviour
 		if (!skyMaterial || !directionalLight)
 			return;
 
+		timeOfDay = Mathf.Clamp(timeOfDay, 0f, 100f);
 		lastTime = timeOfDay;
 
 		SkyKey a = keys[0];
-		SkyKey b = keys[keys.Length - 1];
+		SkyKey b = keys[1];
 
 		for (int i = 0; i < keys.Length - 1; i++)
 		{
@@ -136,13 +162,27 @@ public class TimeOfDayController : MonoBehaviour
 		float blend = Mathf.InverseLerp(a.t, b.t, timeOfDay);
 		blend = blend * blend * (3f - 2f * blend);
 
-		skyMaterial.SetColor("_TopColor", Color.Lerp(a.top, b.top, blend));
-		skyMaterial.SetColor("_MiddleColor", Color.Lerp(a.middle, b.middle, blend));
-		skyMaterial.SetColor("_BottomColor", Color.Lerp(a.bottom, b.bottom, blend));
-		skyMaterial.SetFloat("_Exp", Mathf.Lerp(a.exp, b.exp, blend));
+		skyMaterial.SetColor(
+			"_TopColor",
+			Color.Lerp(a.top, b.top, blend));
 
-		directionalLight.color = Color.Lerp(a.lightColor, b.lightColor, blend);
-		directionalLight.intensity = Mathf.Lerp(a.lightIntensity, b.lightIntensity, blend);
+		skyMaterial.SetColor(
+			"_MiddleColor",
+			Color.Lerp(a.middle, b.middle, blend));
+
+		skyMaterial.SetColor(
+			"_BottomColor",
+			Color.Lerp(a.bottom, b.bottom, blend));
+
+		skyMaterial.SetFloat(
+			"_Exp",
+			Mathf.Lerp(a.exp, b.exp, blend));
+
+		directionalLight.color =
+			Color.Lerp(a.lightColor, b.lightColor, blend);
+
+		directionalLight.intensity =
+			Mathf.Lerp(a.lightIntensity, b.lightIntensity, blend);
 
 		directionalLight.transform.rotation = Quaternion.Slerp(
 			Quaternion.Euler(a.lightRotation),
@@ -151,6 +191,37 @@ public class TimeOfDayController : MonoBehaviour
 		);
 
 		RenderSettings.skybox = skyMaterial;
-		DynamicGI.UpdateEnvironment();
+	}
+
+	void UpdateEnvironmentLighting()
+	{
+		environmentUpdateTimer += Time.deltaTime;
+
+		if (environmentUpdateTimer >= 0.5f)
+		{
+			DynamicGI.UpdateEnvironment();
+			environmentUpdateTimer = 0f;
+		}
+
+	}
+
+	[ContextMenu("Print Lighting State")]
+	void PrintLightingState()
+	{
+		Debug.Log(
+			"Time: " + timeOfDay +
+			"\nActive Skybox: " +
+			(RenderSettings.skybox ? RenderSettings.skybox.name : "None") +
+			"\nAssigned Skybox: " +
+			(skyMaterial ? skyMaterial.name : "None") +
+			"\nAmbient Mode: " + RenderSettings.ambientMode +
+			"\nAmbient Intensity: " + RenderSettings.ambientIntensity +
+			"\nDirectional Light: " +
+			(directionalLight ? directionalLight.name : "None") +
+			"\nLight Intensity: " +
+			(directionalLight ? directionalLight.intensity : 0f) +
+			"\nLight Color: " +
+			(directionalLight ? directionalLight.color.ToString() : "None")
+		);
 	}
 }
