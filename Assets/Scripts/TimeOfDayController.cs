@@ -71,7 +71,12 @@ public class TimeOfDayController : MonoBehaviour
 
 	public void AddTime(float amount)
 	{
-		float targetTime = Mathf.Clamp(timeOfDay + amount, 0f, 100f);
+		SetTime(timeOfDay + amount);
+	}
+
+	public void SetTime(float targetTime)
+	{
+		targetTime = Mathf.Clamp(targetTime, 0f, 100f);
 
 		if (!Application.isPlaying)
 		{

@@ -22,6 +22,9 @@ public class TriggerEventOnEnter : MonoBehaviour
     }
     void OnTriggerEnter(Collider c)
     {
+        if (!isActiveAndEnabled)
+			return;
+
         if (c.gameObject.tag == tagName)
         {
             OnTriggered.Invoke();
