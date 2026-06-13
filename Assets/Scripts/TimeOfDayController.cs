@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 [ExecuteAlways]
 public class TimeOfDayController : MonoBehaviour
@@ -9,10 +10,13 @@ public class TimeOfDayController : MonoBehaviour
 
 	public float transitionTime = 2f;
 
+	[Range(0f, 1f)] public float ambientIntensity = 0.2f;
+
 	public Material skyMaterial;
 	public Light directionalLight;
 
 	float lastTime = -1f;
+	float lastAmbientIntensity = -1f;
 	Coroutine timeRoutine;
 
 	struct SkyKey
@@ -41,7 +45,7 @@ public class TimeOfDayController : MonoBehaviour
 		return c;
 	}
 
-	SkyKey[] keys = new SkyKey[]
+	SkyKey[] keys =
 	{
 		new SkyKey(0,   "#17215E", "#FF6F61", "#FFD37A", "#FFB073", 0.35f, new Vector3(5,   -110, 0), 1.2f),
 		new SkyKey(15,  "#3FA7FF", "#FFE5A3", "#B7F0FF", "#FFF0C2", 0.80f, new Vector3(25,  -75,  0), 1.0f),
@@ -56,13 +60,18 @@ public class TimeOfDayController : MonoBehaviour
 	void Start()
 	{
 		ApplyTimeOfDay();
+		DynamicGI.UpdateEnvironment();
 	}
 
 	void Update()
 	{
-		if (!Application.isPlaying && !Mathf.Approximately(timeOfDay, lastTime))
+		if (!Mathf.Approximately(timeOfDay, lastTime) ||
+			!Mathf.Approximately(ambientIntensity, lastAmbientIntensity))
+		{
 			ApplyTimeOfDay();
+		}
 	}
+
 
 	void OnValidate()
 	{
@@ -94,12 +103,13 @@ public class TimeOfDayController : MonoBehaviour
 	IEnumerator TransitionTime(float targetTime)
 	{
 		float startTime = timeOfDay;
+		float duration = Mathf.Max(transitionTime, 0.01f);
 		float timer = 0f;
 
-		while (timer < transitionTime)
+		while (timer < duration)
 		{
 			timer += Time.deltaTime;
-			float blend = timer / transitionTime;
+			float blend = Mathf.Clamp01(timer / duration);
 
 			timeOfDay = Mathf.Lerp(startTime, targetTime, blend);
 			ApplyTimeOfDay();
@@ -110,6 +120,11 @@ public class TimeOfDayController : MonoBehaviour
 		timeOfDay = targetTime;
 		ApplyTimeOfDay();
 
+		timeRoutine = null;
+
+		// Refresh skybox-based reflections once the transition finishes.
+		DynamicGI.UpdateEnvironment();
+
 		Debug.Log("Time of day moved to: " + timeOfDay);
 	}
 
@@ -118,14 +133,18 @@ public class TimeOfDayController : MonoBehaviour
 		if (!skyMaterial || !directionalLight)
 			return;
 
+		timeOfDay = Mathf.Clamp(timeOfDay, 0f, 100f);
+
 		lastTime = timeOfDay;
+		lastAmbientIntensity = ambientIntensity;
 
 		SkyKey a = keys[0];
 		SkyKey b = keys[keys.Length - 1];
 
 		for (int i = 0; i < keys.Length - 1; i++)
 		{
-			if (timeOfDay >= keys[i].t && timeOfDay <= keys[i + 1].t)
+			if (timeOfDay >= keys[i].t &&
+				timeOfDay <= keys[i + 1].t)
 			{
 				a = keys[i];
 				b = keys[i + 1];
@@ -136,13 +155,20 @@ public class TimeOfDayController : MonoBehaviour
 		float blend = Mathf.InverseLerp(a.t, b.t, timeOfDay);
 		blend = blend * blend * (3f - 2f * blend);
 
-		skyMaterial.SetColor("_TopColor", Color.Lerp(a.top, b.top, blend));
-		skyMaterial.SetColor("_MiddleColor", Color.Lerp(a.middle, b.middle, blend));
-		skyMaterial.SetColor("_BottomColor", Color.Lerp(a.bottom, b.bottom, blend));
+		Color top = Color.Lerp(a.top, b.top, blend);
+		Color middle = Color.Lerp(a.middle, b.middle, blend);
+		Color bottom = Color.Lerp(a.bottom, b.bottom, blend);
+
+		skyMaterial.SetColor("_TopColor", top);
+		skyMaterial.SetColor("_MiddleColor", middle);
+		skyMaterial.SetColor("_BottomColor", bottom);
 		skyMaterial.SetFloat("_Exp", Mathf.Lerp(a.exp, b.exp, blend));
 
-		directionalLight.color = Color.Lerp(a.lightColor, b.lightColor, blend);
-		directionalLight.intensity = Mathf.Lerp(a.lightIntensity, b.lightIntensity, blend);
+		directionalLight.color =
+			Color.Lerp(a.lightColor, b.lightColor, blend);
+
+		directionalLight.intensity =
+			Mathf.Lerp(a.lightIntensity, b.lightIntensity, blend);
 
 		directionalLight.transform.rotation = Quaternion.Slerp(
 			Quaternion.Euler(a.lightRotation),
@@ -151,6 +177,11 @@ public class TimeOfDayController : MonoBehaviour
 		);
 
 		RenderSettings.skybox = skyMaterial;
-		DynamicGI.UpdateEnvironment();
+
+		RenderSettings.ambientMode = AmbientMode.Trilight;
+		RenderSettings.ambientSkyColor = top * ambientIntensity;
+		RenderSettings.ambientEquatorColor = middle * ambientIntensity;
+		RenderSettings.ambientGroundColor = bottom * ambientIntensity;
+		RenderSettings.ambientIntensity = 1f;
 	}
 }
