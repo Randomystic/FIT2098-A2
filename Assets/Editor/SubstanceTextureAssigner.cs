@@ -29,22 +29,23 @@ public static class SubstanceTextureAssigner
 
     private static readonly List<string> MaterialNames = new()
     {
-        "MAT_Axe",
-        "MAT_Bed",
-        "MAT_Bench",
-        "MAT_ChoppingBlock",
-        "MAT_Clipboard",
-        "MAT_FallenLog",
-        "MAT_Firewood",
-        "MAT_KiwiNest",
-        "MAT_MudSlide",
-        "MAT_Rocks",
-        "MAT_Shovel",
-        "MAT_sign",
-        "MAT_Table",
-        "MAT_Trap",
-        "MAT_Trash",
-        "MAT_WoodRack"
+        "MAT_Hands",
+        // "MAT_Axe",
+        // "MAT_Bed",
+        // "MAT_Bench",
+        // "MAT_ChoppingBlock",
+        // "MAT_Clipboard",
+        // "MAT_FallenLog",
+        // "MAT_Firewood",
+        // "MAT_KiwiNest",
+        // "MAT_MudSlide",
+        // "MAT_Rocks",
+        // "MAT_Shovel",
+        // "MAT_sign",
+        // "MAT_Table",
+        // "MAT_Trap",
+        // "MAT_Trash",
+        // "MAT_WoodRack"
     };
 
     private static readonly List<TextureSlot> TextureSlots = new()
