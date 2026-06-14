@@ -15,6 +15,12 @@ public class TimeOfDayController : MonoBehaviour
 	public Material skyMaterial;
 	public Light directionalLight;
 
+	public Material cloudMaterial;
+
+	[Range(0f, 255f)] public float cloudStartOpacity = 20f;
+	[Range(0f, 255f)] public float cloudOpacityDecrease = 10f;
+	public float cloudFadeEndTime = 10f;
+
 	float lastTime = -1f;
 	float lastAmbientIntensity = -1f;
 	Coroutine timeRoutine;
@@ -183,5 +189,30 @@ public class TimeOfDayController : MonoBehaviour
 		RenderSettings.ambientEquatorColor = middle * ambientIntensity;
 		RenderSettings.ambientGroundColor = bottom * ambientIntensity;
 		RenderSettings.ambientIntensity = 1f;
+
+		// Fade the clouds only during the first time of day increase
+		if (cloudMaterial && cloudMaterial.HasProperty("_Color"))
+		{
+			float fadeProgress = Mathf.InverseLerp(
+				0f,
+				Mathf.Max(0.01f, cloudFadeEndTime),
+				timeOfDay
+			);
+
+			float finalOpacity = Mathf.Max(
+				0f,
+				cloudStartOpacity - cloudOpacityDecrease
+			);
+
+			float currentOpacity = Mathf.Lerp(
+				cloudStartOpacity,
+				finalOpacity,
+				fadeProgress
+			);
+
+			Color cloudColor = cloudMaterial.GetColor("_Color");
+			cloudColor.a = currentOpacity / 255f;
+			cloudMaterial.SetColor("_Color", cloudColor);
+		}
 	}
 }
