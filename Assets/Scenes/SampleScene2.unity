@@ -4131,7 +4131,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7313654230448209575, guid: 895f6f3c2d334633b5800312285058d2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7690080512698956844, guid: 895f6f3c2d334633b5800312285058d2, type: 3}
       propertyPath: m_IsActive
@@ -10333,6 +10333,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1076385770}
     m_Modifications:
+    - target: {fileID: 952959568795558366, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 952959568795558366, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: m_SortMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 952959568795558366, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: m_AllowRoll
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 952959568795558366, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 952959568795558366, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 952959568795558366, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: m_RenderAlignment
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194985178566341246, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194985178566341246, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: RotationModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194985178566341246, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: InitialModule.startRotation.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194985178566341246, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: InitialModule.startRotation.minScalar
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1194985178566341246, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
       propertyPath: InitialModule.startColor.maxGradient.atime0
       value: 0
@@ -43222,7 +43262,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1132186176}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
@@ -44102,6 +44142,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1076385770}
     m_Modifications:
+    - target: {fileID: 952959568795558366, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 952959568795558366, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: m_SortMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 952959568795558366, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: m_AllowRoll
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 952959568795558366, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 952959568795558366, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 952959568795558366, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: m_RenderAlignment
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194985178566341246, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194985178566341246, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: RotationModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194985178566341246, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: InitialModule.startRotation.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194985178566341246, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: InitialModule.startRotation.minScalar
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1194985178566341246, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
       propertyPath: InitialModule.startColor.maxGradient.atime0
       value: 0
@@ -46079,6 +46159,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1076385770}
     m_Modifications:
+    - target: {fileID: 952959568795558366, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 952959568795558366, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: m_SortMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 952959568795558366, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: m_AllowRoll
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 952959568795558366, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 952959568795558366, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 952959568795558366, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: m_RenderAlignment
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194985178566341246, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194985178566341246, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: RotationModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194985178566341246, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: InitialModule.startRotation.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194985178566341246, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: InitialModule.startRotation.minScalar
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1194985178566341246, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
       propertyPath: InitialModule.startColor.maxGradient.atime0
       value: 0
@@ -46570,8 +46690,8 @@ MonoBehaviour:
   skyMaterial: {fileID: 2100000, guid: 8adfcb70ccd8a4c409a9645292c3b820, type: 2}
   directionalLight: {fileID: 705507994}
   cloudMaterial: {fileID: 2100000, guid: 02191f95db03d0c47acb03440093afb9, type: 2}
-  cloudStartOpacity: 20
-  cloudOpacityDecrease: 20
+  cloudStartOpacity: 10
+  cloudOpacityDecrease: 10
   cloudFadeEndTime: 11
 --- !u!4 &1220823668
 Transform:
@@ -56326,6 +56446,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1076385770}
     m_Modifications:
+    - target: {fileID: 952959568795558366, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 952959568795558366, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: m_SortMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 952959568795558366, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: m_AllowRoll
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 952959568795558366, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 952959568795558366, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 952959568795558366, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: m_RenderAlignment
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194985178566341246, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194985178566341246, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: RotationModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194985178566341246, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: InitialModule.startRotation.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194985178566341246, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
+      propertyPath: InitialModule.startRotation.minScalar
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1194985178566341246, guid: c95a433e60d4eab468b2b0f2d6da6635, type: 3}
       propertyPath: InitialModule.startColor.maxGradient.atime0
       value: 0
