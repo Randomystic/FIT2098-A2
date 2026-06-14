@@ -20,9 +20,9 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.05411765, g: 0.07764707, b: 0.22117649, a: 0.6}
-  m_AmbientEquatorColor: {r: 0.6, g: 0.2611765, b: 0.2282353, a: 0.6}
-  m_AmbientGroundColor: {r: 0.6, g: 0.4964706, b: 0.28705883, a: 0.6}
+  m_AmbientSkyColor: {r: 0.11094822, g: 0.32643187, b: 0.54981226, a: 0.6}
+  m_AmbientEquatorColor: {r: 0.45453963, g: 0.5423935, b: 0.57794863, a: 0.6}
+  m_AmbientGroundColor: {r: 0.6, g: 0.5531403, b: 0.44157106, a: 0.6}
   m_AmbientIntensity: 1
   m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
@@ -12865,7 +12865,7 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 0.89586914, b: 0.7882353, a: 1}
+  m_Color: {r: 1, g: 0.875, b: 0.75, a: 1}
   m_Intensity: 1
   m_Range: 5
   m_SpotAngle: 70
@@ -12925,7 +12925,7 @@ Transform:
   m_GameObject: {fileID: 338108904}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 10.807, y: -0.607, z: -0.718}
+  m_LocalPosition: {x: 10.905, y: -0.607, z: -0.718}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -26106,8 +26106,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.6901961, b: 0.4509804, a: 1}
-  m_Intensity: 0.35
+  m_Color: {r: 1, g: 0.8649701, b: 0.6186046, a: 1}
+  m_Intensity: 0.9278369
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -26165,7 +26165,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.025019053, y: -0.8183724, z: 0.03573091, w: 0.57303053}
+  m_LocalRotation: {x: 0.34134814, y: 0.51151156, z: -0.22213234, w: 0.75663376}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -26531,7 +26531,7 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 0.89586914, b: 0.7882353, a: 1}
+  m_Color: {r: 1, g: 0.875, b: 0.75, a: 1}
   m_Intensity: 1
   m_Range: 5
   m_SpotAngle: 70
@@ -46247,7 +46247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90bd527587a18c54dbb89944e3bab75e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeOfDay: 0
+  timeOfDay: 47.3
   transitionTime: 10
   ambientIntensity: 0.6
   skyMaterial: {fileID: 2100000, guid: 8adfcb70ccd8a4c409a9645292c3b820, type: 2}
@@ -74220,7 +74220,7 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 0.89586914, b: 0.7882353, a: 1}
+  m_Color: {r: 1, g: 0.875, b: 0.75, a: 1}
   m_Intensity: 2
   m_Range: 5
   m_SpotAngle: 120
