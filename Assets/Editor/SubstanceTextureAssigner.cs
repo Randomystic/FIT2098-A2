@@ -29,7 +29,11 @@ public static class SubstanceTextureAssigner
 
     private static readonly List<string> MaterialNames = new()
     {
-        "MAT_Hands",
+        "MAT_Tree1",
+        "MAT_Tree2",
+        "MAT_Tree3",
+        "MAT_Tree4",
+        // "MAT_Hands",
         // "MAT_Axe",
         // "MAT_Bed",
         // "MAT_Bench",
