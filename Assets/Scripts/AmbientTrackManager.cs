@@ -15,6 +15,8 @@ public class AmbientTrackManager : MonoBehaviour
 	[Range(0f, 100f)] public float eveningSwitchTime = 70f;
 	[Range(0f, 100f)] public float nightSwitchTime = 90f;
 
+	[Range(0f, 1f)] public float ambientVolume = 0.5f;
+
 	public float crossfadeTime = 3f;
 
 	public AudioSource audioSourceA;
@@ -42,7 +44,7 @@ public class AmbientTrackManager : MonoBehaviour
 		if (currentTrack)
 		{
 			currentSource.clip = currentTrack;
-			currentSource.volume = 1f;
+			currentSource.volume = ambientVolume;
 			currentSource.Play();
 		}
 	}
@@ -56,6 +58,9 @@ public class AmbientTrackManager : MonoBehaviour
 
 		if (targetTrack && targetTrack != currentTrack)
 			SwitchTrack(targetTrack);
+
+		if (crossfadeRoutine == null && currentSource)
+			currentSource.volume = ambientVolume;
 	}
 
 	AudioClip GetTrack(float time)
@@ -102,14 +107,14 @@ public class AmbientTrackManager : MonoBehaviour
 				Mathf.Lerp(currentStartVolume, 0f, blend);
 
 			nextSource.volume =
-				Mathf.Lerp(0f, 1f, blend);
+				Mathf.Lerp(0f, ambientVolume, blend);
 
 			yield return null;
 		}
 
 		currentSource.Stop();
 		currentSource.volume = 0f;
-		nextSource.volume = 1f;
+		nextSource.volume = ambientVolume;
 
 		AudioSource oldSource = currentSource;
 		currentSource = nextSource;
